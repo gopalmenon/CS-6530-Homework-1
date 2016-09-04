@@ -127,6 +127,16 @@ $\rho(StoresWithOneStaff, StorePhone - PluralStaffStores)$
 
 \item Find every pair of customer and staff who are from the same city, by listing their customer id and staff id.
 
+This can be done by joining customer address and staff address on city id. Let $CST$, $STF$ and $ADR$ be instances of the customer, staff and address relations.
+
+$\rho(CustomerCity, \pi_{customer\_id, city\_id} (CST \bowtie_{CST.address\_id = ADR.address\_id} ADR)$\\
+
+$\rho(StaffCity, \pi_{staff\_id, city\_id} (STF \bowtie_{STF.address\_id = ADR.address\_id} ADR)$\\
+
+The relations $CustomerCity$ and $StaffCity$ will contain the customer and staff ids respectively along with the city id of their address. If we do a natural join on these two relations, we can obtain a relation with customer id and staff id that are from the same city.
+
+$\pi_{customer\_id, staff\_id} (CustomerCity \bowtie StaffCity)$
+
 \item Find the customer ids who \textit{have rented all and only those} films acted by Emily Dee.
 \end{enumerate}
 
