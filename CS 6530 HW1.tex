@@ -103,6 +103,28 @@ $\pi_{customer\_id, film\_id} (R1 \bowtie_{R1.inventory\_id = I1.inventory\_id} 
 
 \item Print the store id and the phone number for each store that has only one staff member.
 
+Let $STO$, $ADR$ and $STA$ be instances of the store, address and staff relations. In order to find stores with only one staff member, I will subtract the set of stores that have at least two staff members from the set of all stores. I am assuming that since each store has a manager staff id, each store will at least have one staff member who is a manager.\\
+
+The $StorePhone$ relation contains stores id and associated phone for all stores.
+
+$\rho(StorePhone, \pi_{store\_id, phone} (STO \bowtie_{STO.address\_id = ADR.address\_id} ADR$))\\
+
+The $StoreStaff$ relation contains all staff members associated with a store\\
+
+$\rho(StoreStaff, \pi_{store\_id, phone, staff\_id}(StorePhone \bowtie_{StorePhone.store\_id = STA.store\_id} STA))$\\
+
+The $StoresStaffPair$ relation contains the cross product of the $StoreStaff$ relation with itself.\\
+
+$\rho(StoresStaffPair(1 \rightarrow store\_id1, 2 \rightarrow phone1, 3 \rightarrow staff\_id1, 4 \rightarrow store\_id2, 5 \rightarrow phone2, 6 \rightarrow staff\_id2), StoreStaff \times StoreStaff)$\\
+
+The $PluralStaffStores$ relation contains stores ids and associated phone numbers of stores with at least two staff members.\\
+
+$\rho(PluralStaffStores, \pi_{store\_id1, phone1} (\sigma_{store\_id1 = store\_id2 \bigwedge staff\_id1 \neq staff\_id2} StoresStaffPair))$\\
+
+The $StoresWithOneStaff$ relation is the difference between all stores and stores with at least two staff members. It will thus have the store id and associated phone numbers for stores having only one staff member.\\
+
+$\rho(StoresWithOneStaff, StorePhone - PluralStaffStores)$
+
 \item Find every pair of customer and staff who are from the same city, by listing their customer id and staff id.
 
 \item Find the customer ids who \textit{have rented all and only those} films acted by Emily Dee.
