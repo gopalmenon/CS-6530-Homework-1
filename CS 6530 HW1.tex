@@ -95,7 +95,11 @@ Consider the dvdrental schema from the dvdrental database on our database server
 
 \begin{enumerate}
 
-\item Find the customer ids who have rented all films.
+\item Find the customer ids who have rented all films. 
+
+The customer ids who have rented all films can be found by dividing a relation containing customer id and film rentals for the customer, by a relation containing all film ids. Let $R1$, $I1$ and $F1$ be instances of the rental, inventory and film relations. The following will give the customer ids who have rented all films.
+
+$\pi_{customer\_id, film\_id} (R1 \bowtie_{R1.inventory\_id = I1.inventory\_id} I1) / \pi_{film\_id} (F1)$
 
 \item Print the store id and the phone number for each store that has only one staff member.
 
