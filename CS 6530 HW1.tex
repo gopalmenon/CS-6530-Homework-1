@@ -160,7 +160,7 @@ $CustFilmRentals / EmilyDeeFilms$
 
 \begin{equation*}
 \begin{aligned}
- \{ P \; | \; \exists C \in customer \; \exists R \in rental \; \exists I \in inventory \; \forall F \in film (\\
+ \{ P \; | \; \exists C \in customer \; \exists R \in rental \; \exists I \in inventory \; \wedge \forall F \in film (\\
  C.customer\_id &= R.customer\_id \; \wedge \\
  R.inventory\_id &= I.inventory\_id \; \wedge \\
  I.film\_id &= F.film\_id \; \wedge  \\
@@ -195,6 +195,18 @@ P.phone &= ADR.phone \; )  \}
 \end{equation*}
 
 \item Find the customer ids who \textit{have rented all} films acted by Emily Dee (slightly modified from Problem 1).
+\begin{equation*}
+\begin{aligned}
+\{ P \; | \; \exists R \in rental \; \exists I \in inventory \; \exists F \in film \; FA \in film\_actor \; \wedge \forall A \in actor\\
+(R.inventory\_id &= I.inventory\_id \; \wedge\\
+ I.film\_id &= F.film\_id \; \wedge\\
+ F.film\_id &= FA.film\_id \; \wedge\\
+ FA.actor\_id &= A.actor\_id \; \wedge\\
+ A.first\_name &= "Emily" \; \wedge\\
+ A.last\_name &= "Dee" \; \wedge\\
+ P.customer\_id &= R.customer\_id  )\}
+\end{aligned}
+\end{equation*}
 
 \end{enumerate}
 
