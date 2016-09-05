@@ -158,6 +158,17 @@ $CustFilmRentals / EmilyDeeFilms$
 
 \item Find the customer ids who have rented all films.
 
+\begin{equation*}
+\begin{aligned}
+ \{ P \; | \; \exists C \in customer \; \exists R \in rental \; \exists I \in inventory \; \forall F \in film (\\
+ C.customer\_id &= R.customer\_id \; \wedge \\
+ R.inventory\_id &= I.inventory\_id \; \wedge \\
+ I.film\_id &= F.film\_id \; \wedge  \\
+ P.customer\_id &= C.customer\_id\\
+ )  \}
+\end{aligned}
+\end{equation*}
+
 \item Print the store id and the phone number for each store that has only one staff member.
 
 \item Find every pair of customer and staff who are from the same city, by listing their customer id and staff id.
