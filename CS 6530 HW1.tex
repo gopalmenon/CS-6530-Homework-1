@@ -183,6 +183,16 @@ P.phone &= ADR.phone \; )  \}
 \end{equation*}
 
 \item Find every pair of customer and staff who are from the same city, by listing their customer id and staff id.
+\begin{equation*}
+\begin{aligned}
+\{ P \; | \; \exists C \in customer \; \exists S \in staff \; \exists A1 \in address \; A2 \in address\\
+(C.address\_id &= A1.address\_id \; \wedge\\
+ S.address\_id &= A2.address\_id \; \wedge\\
+ A1.city\_id &= A2.city\_id \; \wedge\\
+ P.customer\_id &= C.customer\_id \; \wedge\\
+ P.staff\_id &= S.staff\_id )\}
+\end{aligned}
+\end{equation*}
 
 \item Find the customer ids who \textit{have rented all} films acted by Emily Dee (slightly modified from Problem 1).
 
