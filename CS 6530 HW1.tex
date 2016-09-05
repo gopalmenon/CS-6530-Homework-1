@@ -170,6 +170,17 @@ $CustFilmRentals / EmilyDeeFilms$
 \end{equation*}
 
 \item Print the store id and the phone number for each store that has only one staff member.
+\begin{equation*}
+\begin{aligned}
+ \{ P \; | \; \exists STO \in store \; \exists STA1 \in staff \; \exists STA2 \in staff \; \exists ADR \in address\\
+ \neg(STA1.store\_id &= STO.store\_id \; \wedge \\
+ STA2.store\_id &= STO.store\_id \; \wedge \\
+ STO.address\_id\_id &= ADR.address\_id \; \wedge  \\
+ STA1.staff\_id &\neq STA2.staff\_id \; \wedge \\
+ P.store\_id &= STO.store\_id \; \wedge \\
+P.phone &= ADR.phone \; \wedge)  \}
+\end{aligned}
+\end{equation*}
 
 \item Find every pair of customer and staff who are from the same city, by listing their customer id and staff id.
 
