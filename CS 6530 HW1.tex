@@ -138,6 +138,18 @@ The relations $CustomerCity$ and $StaffCity$ will contain the customer and staff
 $\pi_{customer\_id, staff\_id} (CustomerCity \bowtie StaffCity)$
 
 \item Find the customer ids who \textit{have rented all and only those} films acted by Emily Dee.
+
+First we find all the films acted by Emily Dee. $FACT$ and $ACT$ are instances of relations film_actor and actor. The relation $EmilyDeeFilms$ will contain film ids of all films that Emily Dee acted in.
+
+$\rho(EmilyDeeFilms, \pi_{film\_id}(FACT \bowtie \pi_{actor\_id}(\sigma_{first\_name = "Emily" \bigwedge last\_name = "Dee"} (ACT))))$\\
+
+Next we find the relation containing all customer film rentals. $INV$ and $RNT$ are instances of the inventory and rental relations.
+
+$\rho(CustFilmRentals, \pi_{customer\_id, film\_id} (INV \bowtie_{INV.inventory\_id = RNT.inventory\_id} RNT))$\\
+
+The following relation will give the customer ids who have rented all and only those films acted by Emily Dee.\\
+
+$CustFilmRentals / EmilyDeeFilms$
 \end{enumerate}
 
 \item \textbf{Problem 2.} [28pts] Answer following queries using Tuple Relational Calculus.
