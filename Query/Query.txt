@@ -1,0 +1,6 @@
+select c.customer_id from customer c where not exists (
+select f.film_id from film f where not exists (
+select i.film_id from inventory i, rental r 
+where i.film_id = f.film_id and 
+i.inventory_id = r.inventory_id and 
+r.customer_id = c.customer_id));
