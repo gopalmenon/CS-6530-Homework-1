@@ -10,3 +10,5 @@ StSt as (select StPh.store_id, StPh.phone, st.staff_id from StPh, staff st where
 StStPr as (select s1.store_id , s1.phone from StSt s1, StSt s2 where s1.store_id = s2.store_id and s1.staff_id != s2.staff_id)
 (select * from StPh) except (select * from StStPr);
 
+select cu.customer_id, s.staff_id, ci.city from customer cu, staff s, city ci, address a where cu.address_id = a.address_id and s.address_id = a.address_id and a.city_id = ci.city_id;
+
