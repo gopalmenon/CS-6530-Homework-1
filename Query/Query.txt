@@ -23,3 +23,5 @@ with MaxInvStore as (select store_id, max(inventory_id) as inv from inventory gr
 select a.address, a.address2, a.district, ci.city, a.postal_code, co.country, m.inv from address a, city ci, country co, MaxInvStore m, store s where 
 m.store_id = s.store_id and s.address_id = a.address_id and a.city_id = ci.city_id and ci.country_id = co.country_id;
 
+with MinFilms as (select actor_id, count(film_id) as films from film_actor group by actor_id order by films asc limit 1)
+select a.first_name, a.last_name, m.films from actor a, MinFilms m where a.actor_id = m.actor_id;
