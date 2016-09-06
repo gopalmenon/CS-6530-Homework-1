@@ -18,3 +18,8 @@ select i.film_id from inventory i, rental r
 where i.film_id = f.film_id and 
 i.inventory_id = r.inventory_id and 
 r.customer_id = c.customer_id));
+
+with MaxInvStore as (select store_id, max(inventory_id) as inv from inventory group by store_id order by inv desc limit 1)
+select a.address, a.address2, a.district, ci.city, a.postal_code, co.country, m.inv from address a, city ci, country co, MaxInvStore m, store s where 
+m.store_id = s.store_id and s.address_id = a.address_id and a.city_id = ci.city_id and ci.country_id = co.country_id;
+
