@@ -4,3 +4,9 @@ select i.film_id from inventory i, rental r
 where i.film_id = f.film_id and 
 i.inventory_id = r.inventory_id and 
 r.customer_id = c.customer_id));
+
+with StPh as (select s.store_id, a.phone from store s, address a where s.address_id = a.address_id),
+StSt as (select StPh.store_id, StPh.phone, st.staff_id from StPh, staff st where StPh.store_id = st.store_id),
+StStPr as (select s1.store_id , s1.phone from StSt s1, StSt s2 where s1.store_id = s2.store_id and s1.staff_id != s2.staff_id)
+(select * from StPh) except (select * from StStPr);
+
