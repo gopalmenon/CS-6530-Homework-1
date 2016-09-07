@@ -25,3 +25,5 @@ m.store_id = s.store_id and s.address_id = a.address_id and a.city_id = ci.city_
 
 with MinFilms as (select actor_id, count(film_id) as films from film_actor group by actor_id order by films asc limit 1)
 select a.first_name, a.last_name, m.films from actor a, MinFilms m where a.actor_id = m.actor_id;
+
+select ci.city, sum(p.amount) as total_payment, count(cu.customer_id) as customer_count from city ci, payment p, customer cu, address ad where p.customer_id = cu.customer_id and cu.address_id = ad.address_id and ad.city_id = ci.city_id group by ci.city order by total_payment desc, customer_count desc limit 15;
